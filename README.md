@@ -1,10 +1,4 @@
 # Two string comparison Web API & Web Client (.Net 6.0)
-## _Developed by Isanka Thalagala_
-(Radio Liberty (RFE/RL) practicle assement for Back End Developer, .NET, C#)
-
-[![N|Solid](https://lh3.googleusercontent.com/a/ALm5wu1qRjA2M1O0YLVP4R5wUkIi2lQRUR6FoAZfBqETSA=s83-c-mo)](https://github.com/isanka88)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 ## Web API Overview
  HTTP endpoints that accept base64-encoded JSON of the following format.
@@ -300,7 +294,12 @@ Web client application includes two projects under solution.
 ```
 
 
+## _Developed by Isanka Thalagala_
+(Radio Liberty (RFE/RL) practicle assement for Back End Developer, .NET, C#)
 
+[![N|Solid](https://lh3.googleusercontent.com/a/ALm5wu1qRjA2M1O0YLVP4R5wUkIi2lQRUR6FoAZfBqETSA=s83-c-mo)](https://github.com/isanka88)
+
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 
 
@@ -310,6 +309,9 @@ Web client application includes two projects under solution.
 MIT
 
 **Free Software, Hell Yeah!**
+
+
+
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 

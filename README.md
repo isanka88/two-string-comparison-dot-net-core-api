@@ -2,7 +2,7 @@
 ## _Developed by Isanka Thalagala_
 (Radio Liberty (RFE/RL) practicle assement for Back End Developer, .NET, C#)
 
-[![N|Solid](https://lh3.googleusercontent.com/a/ALm5wu1qRjA2M1O0YLVP4R5wUkIi2lQRUR6FoAZfBqETSA=s83-c-mo)](hhttps://github.com/isanka88)
+[![N|Solid](https://lh3.googleusercontent.com/a/ALm5wu1qRjA2M1O0YLVP4R5wUkIi2lQRUR6FoAZfBqETSA=s83-c-mo)](https://github.com/isanka88)
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
@@ -69,7 +69,7 @@ API includes three projects under solution.
 
 
 Check it out!
-[![N|Solid](https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008102_0.png)](hhttps://github.com/isanka88)
+[![N|Solid](https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008102_0.png)](https://github.com/isanka88)
 
 
 >  #####  ** UseInMemoryDatabase (EF Core In-Memory Database Provider) to store user input data. Basically, It's a database but runs in the InMemory
@@ -199,7 +199,7 @@ Web client application includes two projects under solution.
  > Check it out!
  
  
-[![N|Solid](https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008103_0.png)](hhttps://github.com/isanka88)
+[![N|Solid](https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008103_0.png)](https://github.com/isanka88)
 
 
 ### [TestClient_DotNetCoreWebApp] WebRequestHandler: _Handle GET/POST api requests_

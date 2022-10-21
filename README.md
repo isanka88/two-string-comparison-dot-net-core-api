@@ -60,8 +60,11 @@ Want to know project architecture? Great!
 It's very simple architecture!
 
 API includes three projects under solution.
+ 
 `[<sourse name>.API] .net 6.0 web API` project to implement all the web API endpoints
+ 
 `[<sourse name>.Service] .net 6.0 class library ` project to manage all the logic and database requests
+ 
 `[<sourse name>.Data] .net 6.0 class library ` project to Database context and entities
 
 
@@ -158,7 +161,7 @@ https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-
 ```
 
 
-✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨
+✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨
 
 
 
@@ -186,11 +189,16 @@ Want to check out project architecture? Awesome!
 It's a very simple web application architecture!
 
 Web client application includes two projects under solution.
+ 
 `[<sourse name>.DotNetCoreWebApp] .net 6.0 web app` project to handle frontend
+ 
 `[<sourse name>.Service] .net 6.0 class library ` project to manage all the logic and API requests
 
 
-Check it out!
+
+ > Check it out!
+ 
+ 
 [![N|Solid](https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008103_0.png)](hhttps://github.com/isanka88)
 
 

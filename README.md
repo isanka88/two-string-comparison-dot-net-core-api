@@ -1,4 +1,5 @@
-#  Two string comparison Web API & Web Client (.Net 6.0)
+
+ #  Two string comparison Web API & Web Client (.Net 6.0)
 
 ### Web API Overview
  HTTP endpoints that accept base64-encoded JSON of the following format.
@@ -465,6 +466,69 @@ namespace TestServer_xUnitTests.ServiceTests
 
 ```
 
+#  Suggestions
+
+###  Develop a single API request
+
+I would like to suggest implementing a single API end pint to serve the purpose of all these three API requests. Because those are calling from the same controller action and all three requests work with the same database table. And all three returns simple data sets.
+
+There are more reasons such as,
+- Response weights can be reduced to one response. In this case, it's small responses. But larger responses will increase network latency.
+- Network latency can be reduced to one response.
+- Three SQL queries for each request can be of Batase performance when it becomes a larger database and handle the large query load.
+- Front-end issues can occur if one of the requests late to response in the sequence.
+- Unit tests count will be less.
+- Easy to maintain.
+- Easy to narrow down issues when bug fixing.
+- Development and testing time will be less.
+- Data incomplete issue if one request failed.
+
+
+Check it out!
+[![N|Solid](https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008783_0.png)](https://github.com/isanka88)
+
+Source code
+ ```sh
+[HttpPost]
+        [Route("left-right-compare")]
+        public async Task<JsonResult> StringCompare([FromBody] UserInputRequest request)
+        {
+            if (request == null)
+                return new JsonResult(BadRequest());
+
+            var saveStatus = false;
+            var userInput = await _userInputService.GetUserInputByIdAsync(request.Id);
+            if (userInput == null)
+            {
+                // Save 
+                userInput = await _userInputService.SaveUserInputAsync(new UserInput { InputId = request.Id, Left = request.Left, Right = request.Right });
+                saveStatus = userInput != null ? true : false;
+            }
+            else
+            {
+                // Update 
+                userInput.Left = request.Left;
+                userInput.Right = request.Right;
+                saveStatus = await _userInputService.UpdateUserInputAsync(userInput) > 0 ? true : false;
+            }
+
+            var result = new CompareResultModel { InputId = request.Id, Left = request.Left, Right = request.Right };
+            if (string.IsNullOrEmpty(request.Left))
+            {
+                result.Message = "The left value for this ID is empty!";
+                result.Status = false;
+            }
+            else if (string.IsNullOrEmpty(request.Right))
+            {
+                result.Message = "The right value for this ID is empty!";
+                result.Status = false;
+            }
+            else
+                result = _comparisonService.CompareUserInput(new UserInput { InputId = request.Id, Left = request.Left, Right = request.Right });
+
+            return new JsonResult(new { SaveResult = saveStatus, ComapreResult = result });
+        }
+  ```       
 
 ## _Developed by Isanka Thalagala_
 (Radio Liberty (RFE/RL) practicle assement for Back End Developer, .NET, C#)
@@ -509,3 +573,5 @@ MIT
    [PlOd]: <https://github.com/joemccann/dillinger/tree/master/plugins/onedrive/README.md>
    [PlMe]: <https://github.com/joemccann/dillinger/tree/master/plugins/medium/README.md>
    [PlGa]: <https://github.com/RahulHP/dillinger/blob/master/plugins/googleanalytics/README.md>
+`
+ 

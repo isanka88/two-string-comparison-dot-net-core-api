@@ -3,6 +3,7 @@
 ### Web API Overview
  HTTP endpoints that accept base64-encoded JSON of the following format.
  
+ ### Requirement 
  Endpoint 01 - save/update left value 
  ```sh
 - T<host>/v1/diff/<ID>/left

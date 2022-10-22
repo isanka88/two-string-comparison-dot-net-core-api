@@ -4,22 +4,30 @@
  HTTP endpoints that accept base64-encoded JSON of the following format.
  
  Endpoint 01 - save/update left value 
+ ```sh
 - T<host>/v1/diff/<ID>/left
    - Texample: curl -X POST "<host>/v1/diff/<ID>/left" -H "accept: */*" -H "Content-Type:
 application/custom" -d "\"eyJpbnB1dCI6InRlc3RWYWx1ZSJ9\""
-
+ ```
+ 
 Endpoint 02 - save/update right value 
+```sh
 - T<host>/v1/diff/<ID>/right
    - Texample: curl -X POST "<host>/v1/diff/<ID>/right" -H "accept: */*" -H "Content-Type:
 application/custom" -d "\"eyJpbnB1dCI6InRlc3RWYWx1ZSJ9\""
-
+ ```
+ 
 Endpoint 03 - The provided JSON data needs to be diff-ed and the results shall be available on a third end poin
+```sh
 - T<host>/v1/diff/<ID>
-
+ ```
+ 
 Endpoint 04 - Returns all the saved user inputs
+```sh
 - T<host>/v1/diff/get-saved-inputs
    - Texample: curl -X 'GET' \ '<host>/v1/diff/get-saved-inputs' \  -H 'accept: */*'
-
+ ```
+ 
 [![N|Solid](https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008101_0.png)](hhttps://github.com/isanka88)
 
 

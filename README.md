@@ -1,6 +1,6 @@
-# Two string comparison Web API & Web Client (.Net 6.0)
+#  Two string comparison Web API & Web Client (.Net 6.0)
 
-## Web API Overview
+### Web API Overview
  HTTP endpoints that accept base64-encoded JSON of the following format.
  
  Endpoint 01 - save/update left value 
@@ -71,7 +71,7 @@ API includes three projects under solution.
 
 
 Check it out!
-[![N|Solid](https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008102_0.png)](https://github.com/isanka88)
+[![N|Solid](https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008105_0.png)](https://github.com/isanka88)
 
 
 >  #####  ** UseInMemoryDatabase (EF Core In-Memory Database Provider) to store user input data. Basically, It's a database but runs in the InMemory
@@ -298,6 +298,169 @@ Web client application includes two projects under solution.
             }
         });
     }
+```
+
+
+
+
+## Unit Test Overview (_xUnit_)
+> Read more about [xUnit](https://xunit.net/)
+
+## Tech
+These are the main frameworks or libraries used in the web client:
+- [.net 6.0 framework] - .NET is an open-source developer platform, created by Microsoft, for building many different types of applications.
+- [xUnit(2.1.4)](https://xunit.net/) - Free, open source, community-focused unit testing tool for the .NET Framework.-
+- [FluentAssertions.Json (6.1.0)](https://fluentassertions.com/) - Allow to more naturally specify the expected outcome of a TDD or BDD-style unit tests.
+- [Microsoft.EntityFrameworkCore.InMemory] - This database provider allows Entity Framework Core to be used with an in-memory database. 
+
+Checkout comparison service tests code  _ComparisonServiceTests.cs_
+```sh
+using FluentAssertions;
+using TestServer_Data.Domain;
+using TestServer_Service.Models;
+using TestServer_Service.Services;
+using TestServer_xUnitTests.Context;
+
+namespace TestServer_xUnitTests.ServiceTests
+{
+    public class ComparisonServiceTests
+    {
+        private readonly DataContextInMemory _databaseContext;
+        public ComparisonServiceTests()
+        {
+            _databaseContext = new DataContextInMemory();
+        }
+
+        [Fact]
+        public async void ComparisonService_CompareUserInput_ReturnsCompareResultModel()
+        {
+            //Arrange
+            var dbContext = await _databaseContext.GetDbContext();
+            var comparisonService = new ComparisonService(dbContext);
+
+            //Matching Text Row      
+            #region Matching Text Row      
+
+            /// Expected test result - Matching Text 
+            // -> Result cannot NULL
+            // -> Satatus = TRUE
+
+            var matchingTextRow = new UserInput() { InputId = 1, Left = "MatchingTextRow", Right = "MatchingTextRow" };
+
+            //  Insert test datase before compare
+            dbContext.Add(matchingTextRow);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var matchingTextRowResult = comparisonService.CompareUserInput(matchingTextRow);
+            matchingTextRowResult.Should().NotBeNull();
+            matchingTextRowResult.Should().BeOfType<CompareResultModel>();
+            matchingTextRowResult.Status.Should().BeTrue();
+
+            #endregion
+
+            // Count Diff Text
+            #region Count Diff Text
+
+            /// Expected test result - Count Diff Text
+            // -> Result cannot NULL
+            // -> Satatus = FALSE
+            // -> Message cannot NULL
+            // -> DiffCount = 0
+
+            var countDiffText = new UserInput() { InputId = 2, Left = "CountDiffText", Right = "CountDiff" };
+
+            //  Insert test datase before compare
+            dbContext.Add(countDiffText);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var countDiffTextResult = comparisonService.CompareUserInput(countDiffText);
+            countDiffTextResult.Should().NotBeNull();
+            countDiffTextResult.Should().BeOfType<CompareResultModel>();
+            countDiffTextResult.Status.Should().BeFalse();
+            countDiffTextResult.Message.Should().NotBeNullOrEmpty();
+            countDiffTextResult.DiffCount.Should().Be(0);
+            #endregion
+
+            // Diffrent Text
+            #region Diffrent Text
+            /// Expected test result - Diffrent Text
+            // -> Result cannot NULL
+            // -> Satatus = FALSE
+            // -> Message cannot NULL
+            // -> DiffCount = 6
+            // -> Diff cannot NULL
+
+            var diffrentText = new UserInput() { InputId = 3, Left = "DiffrentText", Right = "DiffrentTTTT" };
+
+            //  Insert test datase before compare
+            dbContext.Add(diffrentText);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var diffrentTextResult = comparisonService.CompareUserInput(diffrentText);
+            diffrentTextResult.Should().NotBeNull();
+            diffrentTextResult.Should().BeOfType<CompareResultModel>();
+            diffrentTextResult.Status.Should().BeFalse();
+            diffrentTextResult.Message.Should().NotBeNullOrEmpty();
+            diffrentTextResult.DiffCount.Should().Be(6); // onlt TTT is dif. so 3x2 = 6
+            diffrentTextResult.Diff.Should().NotBeNull(); // diff offset should returns
+            #endregion
+
+
+            // Left Text Only
+            #region Left Text Only
+
+            /// Expected test result - Left Text Only
+            // -> Result cannot NULL
+            // -> Satatus = FALSE
+            // -> Message cannot NULL
+
+            var leftTextOnly = new UserInput() { InputId = 4, Left = "LeftTextOnly", Right = string.Empty };
+
+            //  Insert test datase before compare
+            dbContext.Add(leftTextOnly);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var leftTextOnlyResult = comparisonService.CompareUserInput(leftTextOnly);
+            leftTextOnlyResult.Should().NotBeNull();
+            leftTextOnlyResult.Should().BeOfType<CompareResultModel>();
+            leftTextOnlyResult.Status.Should().BeFalse();
+            leftTextOnlyResult.Message.Should().NotBeNullOrEmpty();
+            #endregion
+
+
+
+            // Right Text Only
+            #region Right Text Only
+
+            /// Expected test result - Right Text Only
+            // -> Result cannot NULL
+            // -> Satatus = FALSE
+            // -> Message cannot NULL
+
+            var rightTextOnly = new UserInput() { InputId = 5, Left = string.Empty, Right = "RightTextOnly" };
+
+            //  Insert test datase before compare
+            dbContext.Add(rightTextOnly);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var rightTextOnlyResult = comparisonService.CompareUserInput(rightTextOnly);
+            rightTextOnlyResult.Should().NotBeNull();
+            rightTextOnlyResult.Should().BeOfType<CompareResultModel>();
+            rightTextOnlyResult.Status.Should().BeFalse();
+            rightTextOnlyResult.Message.Should().NotBeNullOrEmpty();
+            #endregion
+
+
+
+        }
+
+    }
+}
 
 ```
 
@@ -306,8 +469,6 @@ Web client application includes two projects under solution.
 (Radio Liberty (RFE/RL) practicle assement for Back End Developer, .NET, C#)
 
 [![N|Solid](https://lh3.googleusercontent.com/a/ALm5wu1qRjA2M1O0YLVP4R5wUkIi2lQRUR6FoAZfBqETSA=s83-c-mo)](https://github.com/isanka88)
-
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 
 

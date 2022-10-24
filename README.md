@@ -466,6 +466,18 @@ namespace TestServer_xUnitTests.ServiceTests
 
 ```
 
+#  Limitations
+
+###  There few limitations in this project
+
+- [Id] must be INT value
+- Left & Right cannot NULL. Each POST request expects a request body.
+- All three endpoints must return a successful response to get an accurate result.
+- [Id]  is a redundant attribute. No need [Id]  value to compare left & right values
+- Saving into a database is not necessary. Can compare left & right values without saving into database.
+
+
+
 #  Suggestions
 
 ###  Develop a single API request

@@ -72,5 +72,10 @@ namespace TestClient_DotNetCoreWebApp.Controllers
         {
             return View();
         }
+        public IActionResult Limitations()
+        {
+            return View();
+        }
+        
     }
 }

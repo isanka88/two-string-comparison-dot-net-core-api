@@ -1,0 +1,451 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+<div id="preview" style="margin-top: 50px;">
+    <h1 class="code-line" data-line-start=0 data-line-end=1><a id="Two_string_comparison_Web_API__Web_Client_Net_60_0"></a>Two string comparison Web API &amp; Web Client (.Net 6.0)</h1>
+    <h3 class="code-line" data-line-start=2 data-line-end=3><a id="Web_API_Overview_2"></a>Web API Overview</h3>
+    <p class="has-line-data" data-line-start="3" data-line-end="4">HTTP endpoints that accept base64-encoded JSON of the following format.</p>
+    <p class="has-line-data" data-line-start="5" data-line-end="6">Endpoint 01 - save/update left value</p>
+<pre><code class="has-line-data" data-line-start="7" data-line-end="11" class="language-sh">- T&lt;host&gt;/v1/diff/&lt;ID&gt;/left
+  - Texample: curl -X POST <span class="hljs-string">"&lt;host&gt;/v1/diff/&lt;ID&gt;/left"</span> -H <span class="hljs-string">"accept: */*"</span> -H <span class="hljs-string">"Content-Type:
+application/custom"</span> <span class="hljs-operator">-d</span> <span class="hljs-string">"\"eyJpbnB1dCI6InRlc3RWYWx1ZSJ9\""</span>
+</code></pre>
+    <p class="has-line-data" data-line-start="12" data-line-end="13">Endpoint 02 - save/update right value</p>
+<pre><code class="has-line-data" data-line-start="14" data-line-end="18" class="language-sh">- T&lt;host&gt;/v1/diff/&lt;ID&gt;/right
+   - Texample: curl -X POST <span class="hljs-string">"&lt;host&gt;/v1/diff/&lt;ID&gt;/right"</span> -H <span class="hljs-string">"accept: */*"</span> -H <span class="hljs-string">"Content-Type:
+application/custom"</span> <span class="hljs-operator">-d</span> <span class="hljs-string">"\"eyJpbnB1dCI6InRlc3RWYWx1ZSJ9\""</span>
+</code></pre>
+    <p class="has-line-data" data-line-start="19" data-line-end="20">Endpoint 03 - The provided JSON data needs to be diff-ed and the results shall be available on a third end poin</p>
+<pre><code class="has-line-data" data-line-start="21" data-line-end="23" class="language-sh">- T&lt;host&gt;/v1/diff/&lt;ID&gt;
+</code></pre>
+    <p class="has-line-data" data-line-start="24" data-line-end="25">Endpoint 04 - Returns all the saved user inputs</p>
+<pre><code class="has-line-data" data-line-start="26" data-line-end="29" class="language-sh">- T&lt;host&gt;/v1/diff/get-saved-inputs
+   - Texample: curl -X <span class="hljs-string">'GET'</span> \ <span class="hljs-string">'&lt;host&gt;/v1/diff/get-saved-inputs'</span> \  -H <span class="hljs-string">'accept: */*'</span>
+</code></pre>
+    <p class="has-line-data" data-line-start="30" data-line-end="31"><a href="hhttps://github.com/isanka88"><img src="https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008101_0.png" alt="N|Solid"></a></p>
+    <h2 class="code-line" data-line-start=33 data-line-end=34><a id="Comparison_Logic_33"></a>Comparison Logic</h2>
+    <ul>
+        <li class="has-line-data" data-line-start="34" data-line-end="40">
+            The results shall provide the following info in JSON format
+            <ul>
+                <li class="has-line-data" data-line-start="35" data-line-end="36">If the value of the “input” property of diffed JSON is equal, just return that information saying “inputs were equal”. No need to return compared values.</li>
+                <li class="has-line-data" data-line-start="36" data-line-end="38">
+                    If the value of the “input” property of diffed JSONs is not of equal size, just return that information “inputs are of different size”. No<br>
+                    need to return compared values.
+                </li>
+                <li class="has-line-data" data-line-start="38" data-line-end="40">
+                    If the value of the “input” property of diffed JSONs has the same size, perform a simple diff - return offsets (in both values of the<br>
+                    “input” property) and lengths (in both values of the “input” property) of the differences.
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h2 class="code-line" data-line-start=42 data-line-end=43><a id="Software_Requirement_42"></a>Software Requirement</h2>
+    <ul>
+        <li class="has-line-data" data-line-start="43" data-line-end="44"><a href="https://visualstudio.microsoft.com/vs/">Visual Studio 2022</a></li>
+    </ul>
+    <h2 class="code-line" data-line-start=46 data-line-end=47><a id="Mainly_followed_These_Software_Design_PrinciplesPatterns_46"></a>Mainly followed, These Software Design Principles/Patterns</h2>
+    <ul>
+        <li class="has-line-data" data-line-start="47" data-line-end="48">SOLID Principles</li>
+        <li class="has-line-data" data-line-start="48" data-line-end="49">OOP Concept</li>
+        <li class="has-line-data" data-line-start="49" data-line-end="51">Dependency Injection Pattern(DI)</li>
+    </ul>
+    <h2 class="code-line" data-line-start=51 data-line-end=52><a id="Tech_51"></a>Tech</h2>
+    <p class="has-line-data" data-line-start="52" data-line-end="53">These are the main frameworks or libraries used in the web API:</p>
+    <ul>
+        <li class="has-line-data" data-line-start="53" data-line-end="54"><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6">.net 6.0 framework</a> - .NET is an  open-source developer platform, created by Microsoft, for building many different types of applications.</li>
+        <li class="has-line-data" data-line-start="54" data-line-end="55"><a href="https://learn.microsoft.com/en-us/ef/core/">Entity Framework Core</a> - open source and cross-platform version of the popular Entity Framework data access technology.</li>
+        <li class="has-line-data" data-line-start="55" data-line-end="56"><a href="https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli">Microsoft.EntityFrameworkCore.InMemory</a> - This database provider allows Entity Framework Core to be used with an in-memory database.</li>
+        <li class="has-line-data" data-line-start="56" data-line-end="58"><a href="https://swagger.io/">Swagger</a> - Open source API endpoint viewer to test API endpoints</li>
+    </ul>
+    <h2 class="code-line" data-line-start=58 data-line-end=59><a id="API_DevelopmentArchitecture_58"></a>API Development/Architecture</h2>
+    <p class="has-line-data" data-line-start="60" data-line-end="62">
+        Want to know project architecture? Great!<br>
+        It’s very simple architecture!
+    </p>
+    <p class="has-line-data" data-line-start="63" data-line-end="64">API includes three projects under solution.</p>
+    <p class="has-line-data" data-line-start="65" data-line-end="66"><code>[&lt;sourse name&gt;.API] .net 6.0 web API</code> project to implement all the web API endpoints</p>
+    <p class="has-line-data" data-line-start="67" data-line-end="68"><code>[&lt;sourse name&gt;.Service] .net 6.0 class library</code> project to manage all the logic and database requests</p>
+    <p class="has-line-data" data-line-start="69" data-line-end="70"><code>[&lt;sourse name&gt;.Data] .net 6.0 class library</code> project to Database context and entities</p>
+    <p class="has-line-data" data-line-start="72" data-line-end="74">
+        Check it out!<br>
+        <a href="https://github.com/isanka88"><img src="https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008105_0.png" alt="N|Solid"></a>
+    </p>
+    <blockquote>
+        <h5 class="code-line" data-line-start=76 data-line-end=77><a id="_UseInMemoryDatabase_EF_Core_InMemory_Database_Provider_to_store_user_input_data_Basically_Its_a_database_but_runs_in_the_InMemory_76"></a>** UseInMemoryDatabase (EF Core In-Memory Database Provider) to store user input data. Basically, It’s a database but runs in the InMemory</h5>
+        <p class="has-line-data" data-line-start="77" data-line-end="79">
+            Read more about <a href="https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli">EF Core In-Memory Database Provider</a><br>
+            <a href="https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli">https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli</a>
+        </p>
+    </blockquote>
+    <h3 class="code-line" data-line-start=80 data-line-end=81><a id="TestServer_API_DiffController__Contains_all_the_API_endpoints__80"></a>[TestServer_API] DiffController: <em>Contains all the API endpoints</em></h3>
+<pre><code class="has-line-data" data-line-start="83" data-line-end="163" class="language-sh">    [ApiController]
+    [Route(<span class="hljs-string">"v1/diff"</span>)]
+    public class DiffController : ControllerBase
+    {
+        private <span class="hljs-built_in">readonly</span> IComparisonService _comparisonService;
+        public DiffController(IComparisonService comparisonService)
+        {
+            _comparisonService = comparisonService;
+        }
+
+        [HttpPost]
+        [Route(<span class="hljs-string">"{id}/left"</span>)]
+        public async Task&lt;JsonResult&gt; LeftValue(int id, [FromBody] string input)
+        {
+    <span class="hljs-keyword">if</span> (string.IsNullOrWhiteSpace(input))
+    <span class="hljs-built_in">return</span> new JsonResult(BadRequest());
+
+            var userInput = await _comparisonService.GetUserInputByIdAsync(id);
+    <span class="hljs-keyword">if</span> (userInput.Id == <span class="hljs-number">0</span>)
+            {
+                // Save left value
+                bool result = await _comparisonService.SaveUserInputAsync(new UserInput { InputId = id, Left = input, Right = string.Empty });
+    <span class="hljs-built_in">return</span> new JsonResult(new { Status = result, Message = result ? <span class="hljs-string">"Left value Saved!"</span> : <span class="hljs-string">"Error occur while saving left value!"</span> });
+            }
+    <span class="hljs-keyword">else</span>
+            {
+                // Update left value
+                userInput.Left = input;
+                bool result = await _comparisonService.UpdateUserInputAsync(userInput);
+    <span class="hljs-built_in">return</span> new JsonResult(new { Status = result, Message = result ? <span class="hljs-string">"Left value updated!"</span> : <span class="hljs-string">"Error occur while updating left value!"</span> });
+            }
+        }
+
+        [HttpPost]
+        [Route(<span class="hljs-string">"{id}/right"</span>)]
+        public async Task&lt;JsonResult&gt; RightValue(int id, [FromBody] string input)
+        {
+    <span class="hljs-keyword">if</span> (string.IsNullOrWhiteSpace(input))
+    <span class="hljs-built_in">return</span> new JsonResult(BadRequest());
+
+
+            var userInput = await _comparisonService.GetUserInputByIdAsync(id);
+    <span class="hljs-keyword">if</span> (userInput.Id == <span class="hljs-number">0</span>)
+            {
+                // Save right value
+                bool result = await _comparisonService.SaveUserInputAsync(new UserInput { InputId = id, Left = string.Empty, Right = input });
+    <span class="hljs-built_in">return</span> new JsonResult(new { Status = result, Message = result ? <span class="hljs-string">"Right value Saved!"</span> : <span class="hljs-string">"Error occur while saving right value!"</span> });
+            }
+    <span class="hljs-keyword">else</span>
+            {
+                // Update right value
+                userInput.Right = input;
+                bool result = await _comparisonService.UpdateUserInputAsync(userInput);
+    <span class="hljs-built_in">return</span> new JsonResult(new { Status = result, Message = result ? <span class="hljs-string">"Right value updated!"</span> : <span class="hljs-string">"Error occur while updating right value!"</span> });
+            }
+        }
+
+        [HttpPost]
+        [Route(<span class="hljs-string">"{id}"</span>)]
+        public async Task&lt;JsonResult&gt; GetCompared(int id)
+        {
+            var userInput = await _comparisonService.GetUserInputByIdAsync(id);
+    <span class="hljs-keyword">if</span> (userInput.InputId == <span class="hljs-number">0</span>)
+    <span class="hljs-built_in">return</span> new JsonResult(new CompareResultModel { Message = <span class="hljs-string">"Input values not available for this Id"</span>, Status = <span class="hljs-literal">false</span>, InputId = userInput.InputId, Left = userInput.Left, Right = userInput.Right });
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (string.IsNullOrEmpty(userInput.Left))
+    <span class="hljs-built_in">return</span> new JsonResult(new CompareResultModel { Message = <span class="hljs-string">"The left value for this ID is empty!"</span>, Status = <span class="hljs-literal">false</span>, InputId = userInput.InputId, Left = userInput.Left, Right = userInput.Right });
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (string.IsNullOrEmpty(userInput.Right))
+    <span class="hljs-built_in">return</span> new JsonResult(new CompareResultModel { Message = <span class="hljs-string">"The right value for this ID is empty!"</span>, Status = <span class="hljs-literal">false</span>, InputId = userInput.InputId, Left = userInput.Left, Right = userInput.Right });
+    <span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">return</span> new JsonResult(_comparisonService.CompareUserInput(userInput));
+        }
+
+        [HttpGet]
+        [Route(<span class="hljs-string">"get-saved-inputs"</span>)]
+        public JsonResult <span class="hljs-function"><span class="hljs-title">GetSavedInputsAll</span></span>()
+        {
+    <span class="hljs-built_in">return</span> new JsonResult(_comparisonService.GetSavedInputsAll());
+        }
+    }
+</code></pre>
+    <p class="has-line-data" data-line-start="165" data-line-end="166">✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨✨</p>
+    <h2 class="code-line" data-line-start=169 data-line-end=170><a id="Web_Client_Overview_169"></a>Web Client Overview</h2>
+    <blockquote>
+        <p class="has-line-data" data-line-start="170" data-line-end="171">net 6.0 web application to call the API and test endpoints</p>
+    </blockquote>
+    <ul>
+        <li class="has-line-data" data-line-start="172" data-line-end="173">Display saved user inputs in a grid view by calling T&lt;host&gt;/v1/diff/get-saved-inputs</li>
+        <li class="has-line-data" data-line-start="173" data-line-end="174">Call T&lt;host&gt;/v1/diff/&lt;ID&gt;/left and save/update LEFT value</li>
+        <li class="has-line-data" data-line-start="174" data-line-end="175">Call T&lt;host&gt;/v1/diff/&lt;ID&gt;/right and save/update RIGHT value</li>
+        <li class="has-line-data" data-line-start="175" data-line-end="176">Call T&lt;host&gt;/v1/diff/&lt;ID&gt; and compare LEFT &amp; RIGHT string values and display the result with diff offset</li>
+        <li class="has-line-data" data-line-start="176" data-line-end="177">Display POST request (save/update) results as messages</li>
+    </ul>
+    <p class="has-line-data" data-line-start="179" data-line-end="180"><a href="hhttps://github.com/isanka88"><img src="https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008100_0.png" alt="N|Solid"></a></p>
+    <h2 class="code-line" data-line-start=181 data-line-end=182><a id="Tech_181"></a>Tech</h2>
+    <p class="has-line-data" data-line-start="182" data-line-end="183">These are the main frameworks or libraries used in the web client:</p>
+    <ul>
+        <li class="has-line-data" data-line-start="183" data-line-end="184"><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6">.net 6.0 framework</a> - .NET is an open-source developer platform, created by Microsoft, for building many different types of applications.</li>
+        <li class="has-line-data" data-line-start="184" data-line-end="185"><a href="http://jquery.com">jQuery</a> - handle GET/POST requests in the web client project.</li>
+        <li class="has-line-data" data-line-start="185" data-line-end="187"><a href="https://getbootstrap.com/docs/4.0/components/forms//">Bootstrap</a> - Powerful, extensible, and feature-packed frontend toolkit.</li>
+    </ul>
+    <h2 class="code-line" data-line-start=187 data-line-end=188><a id="Web_Client_DevelopmentArchitecture_187"></a>Web Client Development/Architecture</h2>
+    <p class="has-line-data" data-line-start="189" data-line-end="191">
+        Want to check out project architecture? Awesome!<br>
+        It’s a very simple web application architecture!
+    </p>
+    <p class="has-line-data" data-line-start="192" data-line-end="193">Web client application includes two projects under solution.</p>
+    <p class="has-line-data" data-line-start="194" data-line-end="195"><code>[&lt;sourse name&gt;.DotNetCoreWebApp] .net 6.0 web app</code> project to handle frontend</p>
+    <p class="has-line-data" data-line-start="196" data-line-end="197"><code>[&lt;sourse name&gt;.Service] .net 6.0 class library</code> project to manage all the logic and API requests</p>
+    <blockquote>
+        <p class="has-line-data" data-line-start="200" data-line-end="201">Check it out!</p>
+    </blockquote>
+    <p class="has-line-data" data-line-start="203" data-line-end="204"><a href="https://github.com/isanka88"><img src="https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008103_0.png" alt="N|Solid"></a></p>
+    <h3 class="code-line" data-line-start=206 data-line-end=207><a id="TestClient_DotNetCoreWebApp_WebRequestHandler__Handle_GETPOST_api_requests__206"></a>[TestClient_DotNetCoreWebApp] WebRequestHandler: <em>Handle GET/POST api requests</em></h3>
+<pre><code class="has-line-data" data-line-start="209" data-line-end="265" class="language-sh">    public static class WebRequestHandler
+    {
+        public static async Task&lt;string&gt; POSTRequestAsync(WebRequestModel model)
+        {
+            try
+            {
+                var response = string.Empty;
+                using (var client = new WebClient())
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = <span class="hljs-string">"application/json"</span>;
+                    response = client.UploadString(model.APIEndPoint, JsonConvert.SerializeObject(model.RequestBody));
+                }
+    <span class="hljs-built_in">return</span> response;
+            }
+            catch (WebException ex)
+            {
+                // TODO : Error <span class="hljs-built_in">log</span>;
+    <span class="hljs-built_in">return</span> string.Empty;
+            }
+            catch (Exception ex)
+            {
+                // TODO : Error <span class="hljs-built_in">log</span>;
+    <span class="hljs-built_in">return</span> string.Empty;
+            }
+        }
+
+        public static async Task&lt;string&gt; GETRequestAsync(WebRequestModel model)
+        {
+            var response = string.Empty;
+            try
+            {
+                WebRequest req = WebRequest.Create(model.APIEndPoint);
+                req.Method = <span class="hljs-string">"GET"</span>;
+                req.Timeout = int.MaxValue;
+
+                HttpWebResponse resp = await req.GetResponseAsync() as HttpWebResponse;
+                using (var reader = new StreamReader(resp.GetResponseStream(), ASCIIEncoding.ASCII))
+                {
+                    response = reader.ReadToEnd();
+                }
+            }
+            catch (WebException ex)
+            {
+                // TODO : Error <span class="hljs-built_in">log</span>;
+    <span class="hljs-built_in">return</span> string.Empty;
+            }
+            catch (Exception ex)
+            {
+                // TODO : Error <span class="hljs-built_in">log</span>;
+    <span class="hljs-built_in">return</span> string.Empty;
+            }
+
+    <span class="hljs-built_in">return</span> response;
+        }
+    }
+</code></pre>
+    <h3 class="code-line" data-line-start=267 data-line-end=268><a id="TestClient_DotNetCoreWebApp___Sample_AJAX_POST_request__267"></a>[TestClient_DotNetCoreWebApp]  <em>Sample AJAX POST request</em></h3>
+<pre><code class="has-line-data language-sh" data-line-start="270" data-line-end="301">  
+    <span class="hljs-keyword">function</span> <span class="hljs-function">
+        <span class="hljs-title">compareInputs</span></span>() {
+
+        var postData = {
+            inputId: $(<span class="hljs-string">'#inputId'</span>).val(),
+            left: $(<span class="hljs-string">'#left'</span>).val(),
+            right: $(<span class="hljs-string">'#right'</span>).val()
+        };             
+
+        $.ajax({
+            cache: <span class="hljs-literal">true</span>,
+            dataType: <span class="hljs-string">"json"</span>,
+            method: <span class="hljs-string">"POST"</span>,
+            url: <span class="hljs-string">"@(Url.Action("</span>CompareIputStrings<span class='hljs-string'>", "</span>Home<span class='hljs-string'>"))"</span>,
+            data: postData,
+            success: <span class="hljs-keyword">function</span> (res) {
+
+                // Display save/update messages
+                renderSaveResult(res.saveResponse);
+
+                // display compare result
+                renderCompareResult(res.compareResponse);
+
+                // refresh saved input list
+                getSavedInputs();
+            },
+            error: <span class="hljs-keyword">function</span> (jqXHR, textStatus, errorThrown) {
+                console.log(<span class="hljs-string">"Error"</span>, textStatus);
+            }
+        });
+    }
+</code></pre>
+    <h2 class="code-line" data-line-start=305 data-line-end=306><a id="Unit_Test_Overview__xUnit__305"></a>Unit Test Overview (<em>xUnit</em>)</h2>
+    <blockquote>
+        <p class="has-line-data" data-line-start="306" data-line-end="307">Read more about <a href="https://xunit.net/">xUnit</a></p>
+    </blockquote>
+    <h2 class="code-line" data-line-start=308 data-line-end=309><a id="Tech_308"></a>Tech</h2>
+    <p class="has-line-data" data-line-start="309" data-line-end="310">These are the main frameworks or libraries used in the web client:</p>
+    <ul>
+        <li class="has-line-data" data-line-start="310" data-line-end="311"><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6">.net 6.0 framework</a> - .NET is an open-source developer platform, created by Microsoft, for building many different types of applications.</li>
+        <li class="has-line-data" data-line-start="311" data-line-end="312"><a href="https://xunit.net/">xUnit(2.1.4)</a> - Free, open source, community-focused unit testing tool for the .NET Framework.-</li>
+        <li class="has-line-data" data-line-start="312" data-line-end="313"><a href="https://fluentassertions.com/">FluentAssertions.Json (6.1.0)</a> - Allow to more naturally specify the expected outcome of a TDD or BDD-style unit tests.</li>
+        <li class="has-line-data" data-line-start="313" data-line-end="315"><a href="https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli">Microsoft.EntityFrameworkCore.InMemory</a> - This database provider allows Entity Framework Core to be used with an in-memory database.</li>
+    </ul>
+    <p class="has-line-data" data-line-start="315" data-line-end="316">Checkout comparison service tests code  <em>ComparisonServiceTests.cs</em></p>
+<pre><code class="has-line-data" data-line-start="317" data-line-end="465" class="language-sh">using FluentAssertions;
+using TestServer_Data.Domain;
+using TestServer_Service.Models;
+using TestServer_Service.Services;
+using TestServer_xUnitTests.Context;
+
+namespace TestServer_xUnitTests.ServiceTests
+{
+    public class ComparisonServiceTests
+    {
+        private <span class="hljs-built_in">readonly</span> DataContextInMemory _databaseContext;
+        public <span class="hljs-function"><span class="hljs-title">ComparisonServiceTests</span></span>()
+        {
+            _databaseContext = new DataContextInMemory();
+        }
+
+        [Fact]
+        public async void <span class="hljs-function"><span class="hljs-title">ComparisonService_CompareUserInput_ReturnsCompareResultModel</span></span>()
+        {
+            //Arrange
+            var dbContext = await _databaseContext.GetDbContext();
+            var comparisonService = new ComparisonService(dbContext);
+
+            //Matching Text Row      
+    <span class="hljs-comment">#region Matching Text Row      </span>
+
+            /// Expected <span class="hljs-built_in">test</span> result - Matching Text 
+            // -&gt; Result cannot NULL
+            // -&gt; Satatus = TRUE
+
+            var matchingTextRow = new <span class="hljs-function"><span class="hljs-title">UserInput</span></span>() { InputId = <span class="hljs-number">1</span>, Left = <span class="hljs-string">"MatchingTextRow"</span>, Right = <span class="hljs-string">"MatchingTextRow"</span> };
+
+            //  Insert <span class="hljs-built_in">test</span> datase before compare
+            dbContext.Add(matchingTextRow);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var matchingTextRowResult = comparisonService.CompareUserInput(matchingTextRow);
+            matchingTextRowResult.Should().NotBeNull();
+            matchingTextRowResult.Should().BeOfType&lt;CompareResultModel&gt;();
+            matchingTextRowResult.Status.Should().BeTrue();
+
+    <span class="hljs-comment">#endregion</span>
+
+            // Count Diff Text
+    <span class="hljs-comment">#region Count Diff Text</span>
+
+            /// Expected <span class="hljs-built_in">test</span> result - Count Diff Text
+            // -&gt; Result cannot NULL
+            // -&gt; Satatus = FALSE
+            // -&gt; Message cannot NULL
+            // -&gt; DiffCount = <span class="hljs-number">0</span>
+
+            var countDiffText = new <span class="hljs-function"><span class="hljs-title">UserInput</span></span>() { InputId = <span class="hljs-number">2</span>, Left = <span class="hljs-string">"CountDiffText"</span>, Right = <span class="hljs-string">"CountDiff"</span> };
+
+            //  Insert <span class="hljs-built_in">test</span> datase before compare
+            dbContext.Add(countDiffText);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var countDiffTextResult = comparisonService.CompareUserInput(countDiffText);
+            countDiffTextResult.Should().NotBeNull();
+            countDiffTextResult.Should().BeOfType&lt;CompareResultModel&gt;();
+            countDiffTextResult.Status.Should().BeFalse();
+            countDiffTextResult.Message.Should().NotBeNullOrEmpty();
+            countDiffTextResult.DiffCount.Should().Be(<span class="hljs-number">0</span>);
+    <span class="hljs-comment">#endregion</span>
+
+            // Diffrent Text
+    <span class="hljs-comment">#region Diffrent Text</span>
+            /// Expected <span class="hljs-built_in">test</span> result - Diffrent Text
+            // -&gt; Result cannot NULL
+            // -&gt; Satatus = FALSE
+            // -&gt; Message cannot NULL
+            // -&gt; DiffCount = <span class="hljs-number">6</span>
+            // -&gt; Diff cannot NULL
+
+            var diffrentText = new <span class="hljs-function"><span class="hljs-title">UserInput</span></span>() { InputId = <span class="hljs-number">3</span>, Left = <span class="hljs-string">"DiffrentText"</span>, Right = <span class="hljs-string">"DiffrentTTTT"</span> };
+
+            //  Insert <span class="hljs-built_in">test</span> datase before compare
+            dbContext.Add(diffrentText);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var diffrentTextResult = comparisonService.CompareUserInput(diffrentText);
+            diffrentTextResult.Should().NotBeNull();
+            diffrentTextResult.Should().BeOfType&lt;CompareResultModel&gt;();
+            diffrentTextResult.Status.Should().BeFalse();
+            diffrentTextResult.Message.Should().NotBeNullOrEmpty();
+            diffrentTextResult.DiffCount.Should().Be(<span class="hljs-number">6</span>); // onlt TTT is dif. so <span class="hljs-number">3</span>x2 = <span class="hljs-number">6</span>
+            diffrentTextResult.Diff.Should().NotBeNull(); // diff offset should returns
+    <span class="hljs-comment">#endregion</span>
+
+
+            // Left Text Only
+    <span class="hljs-comment">#region Left Text Only</span>
+
+            /// Expected <span class="hljs-built_in">test</span> result - Left Text Only
+            // -&gt; Result cannot NULL
+            // -&gt; Satatus = FALSE
+            // -&gt; Message cannot NULL
+
+            var leftTextOnly = new <span class="hljs-function"><span class="hljs-title">UserInput</span></span>() { InputId = <span class="hljs-number">4</span>, Left = <span class="hljs-string">"LeftTextOnly"</span>, Right = string.Empty };
+
+            //  Insert <span class="hljs-built_in">test</span> datase before compare
+            dbContext.Add(leftTextOnly);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var leftTextOnlyResult = comparisonService.CompareUserInput(leftTextOnly);
+            leftTextOnlyResult.Should().NotBeNull();
+            leftTextOnlyResult.Should().BeOfType&lt;CompareResultModel&gt;();
+            leftTextOnlyResult.Status.Should().BeFalse();
+            leftTextOnlyResult.Message.Should().NotBeNullOrEmpty();
+    <span class="hljs-comment">#endregion</span>
+
+
+
+            // Right Text Only
+    <span class="hljs-comment">#region Right Text Only</span>
+
+            /// Expected <span class="hljs-built_in">test</span> result - Right Text Only
+            // -&gt; Result cannot NULL
+            // -&gt; Satatus = FALSE
+            // -&gt; Message cannot NULL
+
+            var rightTextOnly = new <span class="hljs-function"><span class="hljs-title">UserInput</span></span>() { InputId = <span class="hljs-number">5</span>, Left = string.Empty, Right = <span class="hljs-string">"RightTextOnly"</span> };
+
+            //  Insert <span class="hljs-built_in">test</span> datase before compare
+            dbContext.Add(rightTextOnly);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var rightTextOnlyResult = comparisonService.CompareUserInput(rightTextOnly);
+            rightTextOnlyResult.Should().NotBeNull();
+            rightTextOnlyResult.Should().BeOfType&lt;CompareResultModel&gt;();
+            rightTextOnlyResult.Status.Should().BeFalse();
+            rightTextOnlyResult.Message.Should().NotBeNullOrEmpty();
+    <span class="hljs-comment">#endregion</span>
+
+
+
+        }
+
+    }
+}
+
+</code></pre>
+    <h2 class="code-line" data-line-start=467 data-line-end=468><a id="_Developed_by_Isanka_Thalagala__467"></a><em>Developed by Isanka Thalagala</em></h2>
+    <p class="has-line-data" data-line-start="468" data-line-end="469">(Radio Liberty (RFE/RL) practicle assement for Back End Developer, .NET, C#)</p>
+    <p class="has-line-data" data-line-start="470" data-line-end="471"><a href="https://github.com/isanka88"><img src="https://lh3.googleusercontent.com/a/ALm5wu1qRjA2M1O0YLVP4R5wUkIi2lQRUR6FoAZfBqETSA=s83-c-mo" alt="N|Solid"></a></p>
+</div>
+

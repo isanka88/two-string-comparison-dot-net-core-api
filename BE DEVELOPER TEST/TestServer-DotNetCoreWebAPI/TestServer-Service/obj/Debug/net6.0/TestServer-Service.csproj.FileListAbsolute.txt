@@ -1,0 +1,30 @@
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\bin\Debug\net6.0\TestServer-Service.deps.json
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\bin\Debug\net6.0\TestServer-Service.dll
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\bin\Debug\net6.0\TestServer-Service.pdb
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\bin\Debug\net6.0\TestServer-Data.dll
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\bin\Debug\net6.0\TestServer-Data.pdb
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.csproj.AssemblyReference.cache
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.GeneratedMSBuildEditorConfig.editorconfig
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.AssemblyInfoInputs.cache
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.AssemblyInfo.cs
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.csproj.CoreCompileInputs.cache
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.csproj.CopyComplete
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.dll
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\refint\TestServer-Service.dll
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.pdb
+E:\Other Projects\BE DEVELOPER TEST - Copy\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\ref\TestServer-Service.dll
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\bin\Debug\net6.0\TestServer-Service.deps.json
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\bin\Debug\net6.0\TestServer-Service.dll
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\bin\Debug\net6.0\TestServer-Service.pdb
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\bin\Debug\net6.0\TestServer-Data.dll
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\bin\Debug\net6.0\TestServer-Data.pdb
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.csproj.AssemblyReference.cache
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.GeneratedMSBuildEditorConfig.editorconfig
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.AssemblyInfoInputs.cache
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.AssemblyInfo.cs
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.csproj.CoreCompileInputs.cache
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.csproj.CopyComplete
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.dll
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\refint\TestServer-Service.dll
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\TestServer-Service.pdb
+E:\Other Projects\two-string-comparison-dot-net-core-api\two-string-comparison-dot-net-core-api\BE DEVELOPER TEST\TestServer-DotNetCoreWebAPI\TestServer-Service\obj\Debug\net6.0\ref\TestServer-Service.dll

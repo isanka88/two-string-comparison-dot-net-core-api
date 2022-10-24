@@ -1,0 +1,136 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.bg-red {
+    --bs-bg-opacity: 1;
+    background-color: #d20043 !important;
+}
+
+.navbar-brand, .text-light {
+    color: white !important;
+}
+
+
+/*home page input grid*/
+.input-table {
+    width: 100%;
+    text-align: left;
+    margin: 20px 0;
+}
+
+    .input-table thead {
+        background-color: #ffebf1;
+    }
+
+    .input-table tr {
+        border: 1px solid #d2004342;
+    }
+
+    .input-table td {
+        padding: 10px;
+    }
+
+    .input-table .error {
+        background-color: #a13030;
+        color: white;
+        padding: 5px;
+        text-align: center !important;
+    }
+
+    .input-table .sucess {
+        background-color: green;
+        color: white;
+        padding: 5px;
+        text-align: center !important;
+    }
+
+.note-div {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #0c0c0c42;
+    background-color: yellow;
+}
+
+.bottom-text {
+    margin-top: 50px;
+}
+
+.note-div span {
+    font-weight: 300;
+    font-style: italic;
+    color: black;
+}
+
+.note-div .note {
+    font-weight: 600;
+    display: block;
+    width: 100%;
+}
+/*input form area*/
+.form-section {
+    margin-top: 20px;
+    text-align: left !important;
+}
+
+    .form-section .id-input {
+        width: 50px;
+    }
+
+/*    compare result box*/
+
+.div-result {
+    background-color: #00656b;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+    .div-result ul {
+        list-style: none;
+    }
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+    .form-group .input-id {
+        width: 115px;
+    }
+
+    .form-group .input-value {
+        width: 450px;
+    }
+
+
+.error-list {
+    list-style: none;
+    padding: 0;
+}
+    .error-list li {
+        padding-bottom: 10px;
+    }
+
+    .error-list span {
+        padding: 4px;
+        border-radius: 5px;
+    }
+
+
+/*    documentation style*/
+

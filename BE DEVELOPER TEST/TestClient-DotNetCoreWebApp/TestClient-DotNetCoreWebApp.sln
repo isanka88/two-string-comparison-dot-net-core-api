@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient-DotNetCoreWebApp", "TestClient-DotNetCoreWebApp\TestClient-DotNetCoreWebApp.csproj", "{6E1ACAE3-88AE-4658-86E7-BBEBB8A35617}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClient--ServicesLibrary", "TestClient--ServicesLibrary\TestClient--ServicesLibrary.csproj", "{377981E4-00A4-4C55-9FB9-A95CC4385C28}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E1ACAE3-88AE-4658-86E7-BBEBB8A35617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E1ACAE3-88AE-4658-86E7-BBEBB8A35617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E1ACAE3-88AE-4658-86E7-BBEBB8A35617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E1ACAE3-88AE-4658-86E7-BBEBB8A35617}.Release|Any CPU.Build.0 = Release|Any CPU
+		{377981E4-00A4-4C55-9FB9-A95CC4385C28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{377981E4-00A4-4C55-9FB9-A95CC4385C28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{377981E4-00A4-4C55-9FB9-A95CC4385C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{377981E4-00A4-4C55-9FB9-A95CC4385C28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D589F39-45EA-4985-A7AC-3D453AAA4ABF}
+	EndGlobalSection
+EndGlobal

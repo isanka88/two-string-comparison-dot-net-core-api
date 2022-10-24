@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/custom.css" asp-append-version="true" />
+<div id="preview" style="margin-top: 50px;">
+    <h1 class="code-line" data-line-start=0 data-line-end=1><a id="Two_string_comparison_Web_API__Web_Client_Net_60_0"></a>Two string comparison Web API &amp; Web Client (.Net 6.0)</h1>
+    
+    <h2 class="code-line" data-line-start=305 data-line-end=306><a id="Unit_Test_Overview__xUnit__305"></a>Unit Test Overview (<em>xUnit</em>)</h2>
+    <blockquote>
+        <p class="has-line-data" data-line-start="306" data-line-end="307">Read more about <a href="https://xunit.net/">xUnit</a></p>
+    </blockquote>
+    <h2 class="code-line" data-line-start=308 data-line-end=309><a id="Tech_308"></a>Tech</h2>
+    <p class="has-line-data" data-line-start="309" data-line-end="310">These are the main frameworks or libraries used in the web client:</p>
+    <ul>
+        <li class="has-line-data" data-line-start="310" data-line-end="311"><a href="https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-6">.net 6.0 framework</a> - .NET is an open-source developer platform, created by Microsoft, for building many different types of applications.</li>
+        <li class="has-line-data" data-line-start="311" data-line-end="312"><a href="https://xunit.net/">xUnit(2.1.4)</a> - Free, open source, community-focused unit testing tool for the .NET Framework.-</li>
+        <li class="has-line-data" data-line-start="312" data-line-end="313"><a href="https://fluentassertions.com/">FluentAssertions.Json (6.1.0)</a> - Allow to more naturally specify the expected outcome of a TDD or BDD-style unit tests.</li>
+        <li class="has-line-data" data-line-start="313" data-line-end="315"><a href="https://learn.microsoft.com/en-us/ef/core/providers/in-memory/?tabs=dotnet-core-cli">Microsoft.EntityFrameworkCore.InMemory</a> - This database provider allows Entity Framework Core to be used with an in-memory database.</li>
+    </ul>
+    <p class="has-line-data" data-line-start="315" data-line-end="316">Checkout comparison service tests code  <em>ComparisonServiceTests.cs</em></p>
+<pre><code class="has-line-data" data-line-start="317" data-line-end="465" class="language-sh">using FluentAssertions;
+using TestServer_Data.Domain;
+using TestServer_Service.Models;
+using TestServer_Service.Services;
+using TestServer_xUnitTests.Context;
+
+namespace TestServer_xUnitTests.ServiceTests
+{
+    public class ComparisonServiceTests
+    {
+        private <span class="hljs-built_in">readonly</span> DataContextInMemory _databaseContext;
+        public <span class="hljs-function"><span class="hljs-title">ComparisonServiceTests</span></span>()
+        {
+            _databaseContext = new DataContextInMemory();
+        }
+
+        [Fact]
+        public async void <span class="hljs-function"><span class="hljs-title">ComparisonService_CompareUserInput_ReturnsCompareResultModel</span></span>()
+        {
+            //Arrange
+            var dbContext = await _databaseContext.GetDbContext();
+            var comparisonService = new ComparisonService(dbContext);
+
+            //Matching Text Row      
+    <span class="hljs-comment">#region Matching Text Row      </span>
+
+            /// Expected <span class="hljs-built_in">test</span> result - Matching Text 
+            // -&gt; Result cannot NULL
+            // -&gt; Satatus = TRUE
+
+            var matchingTextRow = new <span class="hljs-function"><span class="hljs-title">UserInput</span></span>() { InputId = <span class="hljs-number">1</span>, Left = <span class="hljs-string">"MatchingTextRow"</span>, Right = <span class="hljs-string">"MatchingTextRow"</span> };
+
+            //  Insert <span class="hljs-built_in">test</span> datase before compare
+            dbContext.Add(matchingTextRow);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var matchingTextRowResult = comparisonService.CompareUserInput(matchingTextRow);
+            matchingTextRowResult.Should().NotBeNull();
+            matchingTextRowResult.Should().BeOfType&lt;CompareResultModel&gt;();
+            matchingTextRowResult.Status.Should().BeTrue();
+
+    <span class="hljs-comment">#endregion</span>
+
+            // Count Diff Text
+    <span class="hljs-comment">#region Count Diff Text</span>
+
+            /// Expected <span class="hljs-built_in">test</span> result - Count Diff Text
+            // -&gt; Result cannot NULL
+            // -&gt; Satatus = FALSE
+            // -&gt; Message cannot NULL
+            // -&gt; DiffCount = <span class="hljs-number">0</span>
+
+            var countDiffText = new <span class="hljs-function"><span class="hljs-title">UserInput</span></span>() { InputId = <span class="hljs-number">2</span>, Left = <span class="hljs-string">"CountDiffText"</span>, Right = <span class="hljs-string">"CountDiff"</span> };
+
+            //  Insert <span class="hljs-built_in">test</span> datase before compare
+            dbContext.Add(countDiffText);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var countDiffTextResult = comparisonService.CompareUserInput(countDiffText);
+            countDiffTextResult.Should().NotBeNull();
+            countDiffTextResult.Should().BeOfType&lt;CompareResultModel&gt;();
+            countDiffTextResult.Status.Should().BeFalse();
+            countDiffTextResult.Message.Should().NotBeNullOrEmpty();
+            countDiffTextResult.DiffCount.Should().Be(<span class="hljs-number">0</span>);
+    <span class="hljs-comment">#endregion</span>
+
+            // Diffrent Text
+    <span class="hljs-comment">#region Diffrent Text</span>
+            /// Expected <span class="hljs-built_in">test</span> result - Diffrent Text
+            // -&gt; Result cannot NULL
+            // -&gt; Satatus = FALSE
+            // -&gt; Message cannot NULL
+            // -&gt; DiffCount = <span class="hljs-number">6</span>
+            // -&gt; Diff cannot NULL
+
+            var diffrentText = new <span class="hljs-function"><span class="hljs-title">UserInput</span></span>() { InputId = <span class="hljs-number">3</span>, Left = <span class="hljs-string">"DiffrentText"</span>, Right = <span class="hljs-string">"DiffrentTTTT"</span> };
+
+            //  Insert <span class="hljs-built_in">test</span> datase before compare
+            dbContext.Add(diffrentText);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var diffrentTextResult = comparisonService.CompareUserInput(diffrentText);
+            diffrentTextResult.Should().NotBeNull();
+            diffrentTextResult.Should().BeOfType&lt;CompareResultModel&gt;();
+            diffrentTextResult.Status.Should().BeFalse();
+            diffrentTextResult.Message.Should().NotBeNullOrEmpty();
+            diffrentTextResult.DiffCount.Should().Be(<span class="hljs-number">6</span>); // onlt TTT is dif. so <span class="hljs-number">3</span>x2 = <span class="hljs-number">6</span>
+            diffrentTextResult.Diff.Should().NotBeNull(); // diff offset should returns
+    <span class="hljs-comment">#endregion</span>
+
+
+            // Left Text Only
+    <span class="hljs-comment">#region Left Text Only</span>
+
+            /// Expected <span class="hljs-built_in">test</span> result - Left Text Only
+            // -&gt; Result cannot NULL
+            // -&gt; Satatus = FALSE
+            // -&gt; Message cannot NULL
+
+            var leftTextOnly = new <span class="hljs-function"><span class="hljs-title">UserInput</span></span>() { InputId = <span class="hljs-number">4</span>, Left = <span class="hljs-string">"LeftTextOnly"</span>, Right = string.Empty };
+
+            //  Insert <span class="hljs-built_in">test</span> datase before compare
+            dbContext.Add(leftTextOnly);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var leftTextOnlyResult = comparisonService.CompareUserInput(leftTextOnly);
+            leftTextOnlyResult.Should().NotBeNull();
+            leftTextOnlyResult.Should().BeOfType&lt;CompareResultModel&gt;();
+            leftTextOnlyResult.Status.Should().BeFalse();
+            leftTextOnlyResult.Message.Should().NotBeNullOrEmpty();
+    <span class="hljs-comment">#endregion</span>
+
+
+
+            // Right Text Only
+    <span class="hljs-comment">#region Right Text Only</span>
+
+            /// Expected <span class="hljs-built_in">test</span> result - Right Text Only
+            // -&gt; Result cannot NULL
+            // -&gt; Satatus = FALSE
+            // -&gt; Message cannot NULL
+
+            var rightTextOnly = new <span class="hljs-function"><span class="hljs-title">UserInput</span></span>() { InputId = <span class="hljs-number">5</span>, Left = string.Empty, Right = <span class="hljs-string">"RightTextOnly"</span> };
+
+            //  Insert <span class="hljs-built_in">test</span> datase before compare
+            dbContext.Add(rightTextOnly);
+            dbContext.SaveChanges();
+
+            // get the compate result
+            var rightTextOnlyResult = comparisonService.CompareUserInput(rightTextOnly);
+            rightTextOnlyResult.Should().NotBeNull();
+            rightTextOnlyResult.Should().BeOfType&lt;CompareResultModel&gt;();
+            rightTextOnlyResult.Status.Should().BeFalse();
+            rightTextOnlyResult.Message.Should().NotBeNullOrEmpty();
+    <span class="hljs-comment">#endregion</span>
+
+
+
+        }
+
+    }
+}
+
+</div>
+

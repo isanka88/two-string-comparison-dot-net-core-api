@@ -1,0 +1,62 @@
+﻿<div id="preview">
+    <h1 class="code-line" data-line-start=1 data-line-end=2><a id="Suggesrions_1"></a>Suggestions</h1>
+    <h3 class="code-line" data-line-start=3 data-line-end=4><a id="Develop_a_single_API_request_3"></a>Develop a single API request</h3>
+    <p class="has-line-data" data-line-start="5" data-line-end="6">I would like to suggest implementing a single API end pint to serve the purpose of all these three API requests. Because those are calling from the same controller action and all three requests work with the same database table. And all three returns simple data sets.</p>
+    <p class="has-line-data" data-line-start="7" data-line-end="8">There are more reasons such as,</p>
+    <ul>
+        <li class="has-line-data" data-line-start="8" data-line-end="9">Response weights can be reduced to one response. In this case, it’s small responses. But larger responses will increase network latency.</li>
+        <li class="has-line-data" data-line-start="9" data-line-end="10">Network latency can be reduced to one response.</li>
+        <li class="has-line-data" data-line-start="10" data-line-end="11">Three SQL queries for each request can be of Batase performance when it becomes a larger database and handle the large query load.</li>
+        <li class="has-line-data" data-line-start="11" data-line-end="12">Front-end issues can occur if one of the requests late to response in the sequence.</li>
+        <li class="has-line-data" data-line-start="12" data-line-end="13">Unit tests count will be less.</li>
+        <li class="has-line-data" data-line-start="13" data-line-end="14">Easy to maintain.</li>
+        <li class="has-line-data" data-line-start="14" data-line-end="15">Easy to narrow down issues when bug fixing.</li>
+        <li class="has-line-data" data-line-start="15" data-line-end="16">Development and testing time will be less.</li>
+        <li class="has-line-data" data-line-start="16" data-line-end="17">Data incomplete issue if one request failed.</li>
+    </ul>
+    <p class="has-line-data" data-line-start="19" data-line-end="21">
+        Check it out!<br>
+        <a href="https://github.com/isanka88"><img src="https://e360b2bstorage.blob.core.windows.net/b2b-sportcar/images/0008783_0.png" alt="N|Solid"></a>
+    </p>
+    <p class="has-line-data" data-line-start="22" data-line-end="23">Source code</p>
+<pre><code class="has-line-data" data-line-start="24" data-line-end="64" class="language-sh">[HttpPost]
+       [Route(<span class="hljs-string">"left-right-compare"</span>)]
+       public async Task&lt;JsonResult&gt; StringCompare([FromBody] UserInputRequest request)
+       {
+    <span class="hljs-keyword">if</span> (request == null)
+    <span class="hljs-built_in">return</span> new JsonResult(BadRequest());
+
+           var saveStatus = <span class="hljs-literal">false</span>;
+           var userInput = await _userInputService.GetUserInputByIdAsync(request.Id);
+    <span class="hljs-keyword">if</span> (userInput == null)
+           {
+               // Save 
+               userInput = await _userInputService.SaveUserInputAsync(new UserInput { InputId = request.Id, Left = request.Left, Right = request.Right });
+               saveStatus = userInput != null ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>;
+           }
+    <span class="hljs-keyword">else</span>
+           {
+               // Update 
+               userInput.Left = request.Left;
+               userInput.Right = request.Right;
+               saveStatus = await _userInputService.UpdateUserInputAsync(userInput) &gt; <span class="hljs-number">0</span> ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>;
+           }
+
+           var result = new CompareResultModel { InputId = request.Id, Left = request.Left, Right = request.Right };
+    <span class="hljs-keyword">if</span> (string.IsNullOrEmpty(request.Left))
+           {
+               result.Message = <span class="hljs-string">"The left value for this ID is empty!"</span>;
+               result.Status = <span class="hljs-literal">false</span>;
+           }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (string.IsNullOrEmpty(request.Right))
+           {
+               result.Message = <span class="hljs-string">"The right value for this ID is empty!"</span>;
+               result.Status = <span class="hljs-literal">false</span>;
+           }
+    <span class="hljs-keyword">else</span>
+               result = _comparisonService.CompareUserInput(new UserInput { InputId = request.Id, Left = request.Left, Right = request.Right });
+
+    <span class="hljs-built_in">return</span> new JsonResult(new { SaveResult = saveStatus, ComapreResult = result });
+       }
+</code></pre>
+</div>

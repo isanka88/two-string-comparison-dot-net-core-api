@@ -1,0 +1,40 @@
+﻿@using TestClient__ServicesLibrary.Models;
+@model UserInputViewModel;
+
+
+@if (Model.Response.Count > 0)
+{
+    <h3>All User Inputs</h3>
+    <table class="input-table">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Left</td>
+                <td>Right</td>
+                <td>Status</td>
+                <td>Diff Characters</td>
+                <td>Diff Count</td>
+                <td>Message</td>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Response)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Left</td>
+                <td>@item.Right</td>
+                @if (@item.Status)
+                {
+                    <td><div class="sucess">Matched</div></td>
+                }
+                else
+                {
+                    <td><div class="error">Not Matched</div></td>
+                }
+                <td>@item.Diff</td>
+                <td>@item.DiffCount</td>
+                <td>@item.Message</td>
+            </tr>
+        }
+    </table>
+}

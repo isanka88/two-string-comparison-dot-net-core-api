@@ -1,0 +1,173 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+   @*<div class="note-div">
+        <span class="note">Note</span>
+        <span>** Please run TestServer-DotNetCoreWebAPI before testing</span>
+    </div>*@
+
+    <h1 class="display-4">String Comparator</h1>
+    <div class="form-section row">
+        <div class="col-md-7">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Input Id</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control input-id" id="inputId" placeholder="Input Id">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Left Value</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control input-value" id="left" placeholder="Enter left value">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Right Value</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control input-value" id="right" placeholder="Enter right value">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-10">
+                    <button id="btnCompare" class="btn btn-primary mb-2">Compare</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-10">
+                    <div id="div-message-list"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div id="div-result"></div>           
+        </div>
+    </div>
+
+
+
+    <div id="gridInputList"></div>
+    <div class="bottom-text">
+        <p>Developed by Isanka Thalagala <a href="mailto:isanka.thalagala@gmail.com">isanka.thalagala@gmail.com</a>&nbsp; Radio Liberty (RFE/RL) - Practicle Test for Back End Developer, .NET, C#</p>
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+    $(() => {
+        getSavedInputs();
+
+        $('#btnCompare').click(function (e) {
+            compareInputs();
+        });
+    });
+
+    function getSavedInputs() {
+        $.ajax({
+            dataType: "html",
+            cache: true,
+            method: "GET",
+            url: "@(Url.Action("GetSavedInputsAll", "Home"))",
+            success: function (res) {
+                $('#gridInputList').html('').html(res);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error", textStatus);
+            }
+        });
+
+    }
+
+    function compareInputs() {
+
+        var postData = {
+            inputId: $('#inputId').val(),
+            left: $('#left').val(),
+            right: $('#right').val()
+        };             
+
+        $.ajax({
+            cache: true,
+            dataType: "json",
+            method: "POST",
+            url: "@(Url.Action("CompareIputStrings", "Home"))",
+            data: postData,
+            success: function (res) {
+                console.log("res", res);
+
+                // Display save/update messages
+                renderSaveResult(res.saveResponse);
+
+                // display compare result
+                renderCompareResult(res.compareResponse);
+
+                // refresh saved input list
+                getSavedInputs();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error", textStatus);
+            }
+        });
+    }
+
+
+
+    function renderSaveResult(result) {
+        var errorList = '<ul class="error-list">';
+        for (let i = 0; i < result.length; i++) {
+            if (result[i].status) {
+                errorList += '<li> <span class="alert-success" > ' + result[i].message + ' </span></li>';
+            }
+            else {
+                errorList += '<li> <span class="alert-danger" > ' + result[i].message + ' </span></li>';
+            }
+        }
+        errorList += '</ul>';
+        $('#div-message-list').html('').html(errorList);
+    }
+
+    function renderCompareResult(result) {
+
+        var html = `<div class="div-result">
+                             <h3>Result</h3>
+                           <ul>
+                               <li>
+                                   <span class="result-label">Input Id :</span>
+                                      <span class="result-value">` + result.inputId + `</span>
+                              </li>
+                                <li>
+                                    <span class="result-label">Left Input :</span>
+                                            <span class="result-value">` + result.left + `</span>
+                                </li>
+                                <li>
+                                    <span class="result-label">Right Input :</span>
+                                            <span class="result-value">` + result.right + `</span>
+                                </li>
+                                <li>
+                                    <span class="result-label">Status :</span>
+                                            <span class="result-value">` + result.status + `</span>
+                                </li>
+                                <li>
+                                        <span class="result-label">Diff Characters :</span>
+                                    <span class="result-value">` + result.diff + `</span>
+                                </li>
+                                <li>
+                                    <span class="result-label">Diff Count :</span>
+                                    <span class="result-value">` + result.diffCount + `</span>
+                                </li>
+                               <li>
+                                    <span class="result-label">Message :</span>
+                                    <span class="result-value">` + result.message + `</span>
+                                </li>
+                            </ul>
+                        </div>`;
+
+        $('#div-result').html('').html(html);
+    }
+</script>
